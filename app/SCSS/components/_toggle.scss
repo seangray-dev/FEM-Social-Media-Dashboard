@@ -1,0 +1,89 @@
+@use "../util/" as u;
+
+.toggle {
+  display: grid;
+  grid-template-columns: 1fr u.rem(48) 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: u.rem(4.8) u.rem(8);
+  border: none;
+  margin: 0;
+
+  label {
+    font-size: u.rem(14);
+    align-self: center;
+
+    &[for="dark"] {
+      grid-column: 1 / 2;
+      justify-self: end;
+    }
+
+    &[for="system"] {
+      grid-column: 1 / 4;
+      grid-row: 2 / 3;
+      justify-self: center;
+      align-self: start;
+    }
+
+    &[for="light"] {
+      grid-column: 3 / 4;
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    height: u.rem(24);
+  }
+
+  input[type="radio"] {
+    opacity: 0;
+    margin: 0 u.rem(-2) 0 u.rem(-2);
+    width: u.rem(15);
+    height: u.rem(24);
+    z-index: 1;
+    position: relative;
+
+    &:focus ~ .toggle__button {
+      border: u.rem(1) solid white;
+    }
+  }
+
+  &__background {
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    border-radius: u.rem(12);
+    overflow: hidden;
+    background: linear-gradient(
+      225deg,
+      var(--toggle-bg-end) 0,
+      var(--toggle-bg-start) 98.02%
+    );
+  }
+
+  &__button {
+    position: absolute;
+    left: u.rem(3);
+    top: u.rem(3);
+    right: 100%;
+    width: u.rem(18);
+    height: u.rem(18);
+    border-radius: 50%;
+    background-color: var(--dark-bg);
+    transition: all 0.2s ease-in-out;
+  }
+
+  #light:checked ~ .toggle__button {
+    right: u.rem(3);
+    left: calc(100% - u.rem(21));
+  }
+
+  #system:checked ~ .toggle__button {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%);
+  }
+}
