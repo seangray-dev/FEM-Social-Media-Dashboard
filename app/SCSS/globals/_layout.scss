@@ -9,3 +9,10 @@
     padding: 0;
   }
 }
+
+.cards {
+  @include u.breakpoint(medium) {
+    display: flex;
+    gap: u.rem(30);
+  }
+}
