@@ -45,7 +45,7 @@ Users should be able to:
 
 ### Useful resources
 
-- [Accesbile Option/Toggle Switch](https://codepen.io/SaraSoueidan/pen/jpBbrq/) - This helped me for accessibility reasons. I really Sara;s approach and will use it going forward.
+- [Accesbile Option/Toggle Switch](https://codepen.io/SaraSoueidan/pen/jpBbrq/) - This helped me for accessibility reasons. I really Sara's approach and will use it going forward.
 
 ## Author
 
