@@ -2,14 +2,23 @@
 
 .toggle {
   display: grid;
-  grid-template-columns: 1fr u.rem(48);
-  gap: u.rem(4.8) u.rem(8);
+  grid-template-columns: 1fr 3rem;
   border: none;
   margin: 0;
 
-  legend {
+  label {
     font-size: u.rem(14);
-    grid-column: 1 / 2;
+    font-weight: 700;
+    color: var(--toggle);
+
+    &[for="dark"] {
+      line-height: u.rem(24);
+      margin-right: u.rem(13);
+    }
+
+    &[for="light"] {
+      display: none;
+    }
   }
 
   &__wrapper {
@@ -21,7 +30,7 @@
   input[type="radio"] {
     opacity: 0;
     margin: 0 u.rem(-2) 0 u.rem(-2);
-    width: u.rem(15);
+    width: u.rem(25);
     height: u.rem(24);
     z-index: 1;
     position: relative;
@@ -39,11 +48,7 @@
     top: 0;
     border-radius: u.rem(12);
     overflow: hidden;
-    background: linear-gradient(
-      225deg,
-      var(--toggle-bg-end) 0,
-      var(--toggle-bg-start) 98.02%
-    );
+    background: var(--toggle-bg);
   }
 
   &__button {
@@ -54,7 +59,7 @@
     width: u.rem(18);
     height: u.rem(18);
     border-radius: 50%;
-    background-color: var(--dark-bg);
+    background-color: var(--toggle-button);
     transition: all 0.2s ease-in-out;
   }
 
@@ -68,4 +73,8 @@
     right: auto;
     transform: translate(-50%);
   }
+}
+
+.visually-hidden {
+  display: none;
 }
