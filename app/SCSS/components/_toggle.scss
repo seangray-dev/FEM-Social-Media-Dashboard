@@ -1,10 +1,15 @@
 @use "../util/" as u;
 
 .toggle {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 3rem;
   border: none;
   margin: 0;
+
+  @include u.breakpoint(medium) {
+    width: auto;
+  }
 
   label {
     font-size: u.rem(14);

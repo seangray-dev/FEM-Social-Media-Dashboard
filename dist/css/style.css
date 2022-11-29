@@ -257,10 +257,16 @@ a:active {
 }
 
 .toggle {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 3rem;
   border: none;
   margin: 0;
+}
+@media (min-width: 40em) {
+  .toggle {
+    width: auto;
+  }
 }
 .toggle label {
   font-size: 0.875rem;
@@ -339,14 +345,26 @@ a:active {
 }
 .header__title {
   width: 100%;
+  padding-bottom: 1.5625rem;
+  border-bottom: 1px solid var(--dark-text1);
 }
 @media (min-width: 40em) {
   .header__title {
     width: auto;
+    padding-bottom: 0;
+    border: none;
   }
 }
 .header__subtitle {
   font-size: 0.875rem;
   font-weight: 700;
   color: var(--text-color2);
+}
+.header__toggle {
+  margin-top: 1.5625rem;
+}
+@media (min-width: 40em) {
+  .header__toggle {
+    margin-top: 0;
+  }
 }/*# sourceMappingURL=style.css.map */

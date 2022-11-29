@@ -13,9 +13,13 @@
 
   &__title {
     width: 100%;
+    padding-bottom: u.rem(25);
+    border-bottom: 1px solid var(--dark-text1);
 
     @include u.breakpoint(medium) {
       width: auto;
+      padding-bottom: 0;
+      border: none;
     }
   }
 
@@ -23,5 +27,13 @@
     font-size: u.rem(14);
     font-weight: 700;
     color: var(--text-color2);
+  }
+
+  &__toggle {
+    margin-top: u.rem(25);
+
+    @include u.breakpoint(medium) {
+      margin-top: 0;
+    }
   }
 }
