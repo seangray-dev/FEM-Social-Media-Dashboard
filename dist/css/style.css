@@ -13,8 +13,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--font-primary);
-  background-color: var(--dark-bg);
-  color: var(--dark-text2);
+  background-color: var(--background);
+  color: var(--text-color);
 }
 
 h1,
@@ -34,6 +34,11 @@ h1 {
   }
 }
 
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
 a,
 a:visited,
 a:active {
@@ -46,21 +51,64 @@ a:active {
   --facebook: hsl(208, 92%, 53%);
   --twitter: hsl(203, 89%, 53%);
   --instagram-start: hsl(37, 97%, 70%);
-  --instagram--end: hsl(329, 70%, 58%);
-  --youTube: hsl(348, 97%, 39%);
+  --instagram-middle: hsl(5, 77%, 71%);
+  --instagram-end: hsl(329, 70%, 58%);
+  --youtube: hsl(348, 97%, 39%);
   --toggle-bg-start: hsl(210, 78%, 56%);
   --toggle-bg-end: hsl(146, 68%, 55%);
-  --toggle: hsl(230, 22%, 74%);
+  --toggle-light: hsl(230, 22%, 74%);
+  --toggle-button-light: hsl(228, 46%, 96%);
+  --toggle-bg-light: hsl(230, 19%, 60%);
   --dark-bg: hsl(230, 17%, 14%);
   --dark-bg-top: hsl(232, 19%, 15%);
   --dark-card: hsl(228, 28%, 20%);
+  --dark-card-hover: hsl(228, 25%, 27%);
   --dark-text1: hsl(228, 34%, 66%);
   --dark-text2: hsl(0, 0%, 100%);
   --light-bg: hsl(0, 0%, 100%);
   --light-bg-top: hsl(225, 100%, 98%);
   --light-card: hsl(227, 47%, 96%);
+  --light-card-hover: hsl(228, 33%, 91%);
   --light-text1: hsl(228, 12%, 44%);
   --light-text2: hsl(230, 17%, 14%);
+}
+:root body.light {
+  --background: var(--light-bg);
+  --text-color: var(--light-text2);
+  --text-color2: var(--light-text1);
+  --card-bg: var(--light-card);
+  --card-hover: var(--light-card-hover);
+  --toggle: var(--toggle-light);
+  --toggle-bg: var(--toggle-bg-light);
+  --toggle-button: var(--toggle-button-light);
+}
+:root body.dark {
+  --background: var(--dark-bg);
+  --text-color: var(--dark-text2);
+  --text-color2: var(--dark-text1);
+  --card-bg: var(--dark-card);
+  --card-hover: var(--dark-card-hover);
+  --toggle-bg: linear-gradient(
+    225deg,
+    var(--toggle-bg-end) 0,
+    var(--toggle-bg-start) 98.02%
+  );
+  --toggle-button: var(--dark-bg);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--dark-bg);
+    --text-color: var(--dark-text2);
+    --text-color2: var(--dark-text1);
+    --card-bg: var(--dark-card);
+    --card-hover: var(--dark-card-hover);
+    --toggle-bg: linear-gradient(
+      225deg,
+      var(--toggle-bg-end) 0,
+      var(--toggle-bg-start) 98.02%
+    );
+    --toggle-button: var(--dark-bg);
+  }
 }
 
 :root {
@@ -78,46 +126,163 @@ a:active {
   }
 }
 
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.875rem;
+}
+@media (min-width: 40em) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 71.875em) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 .card {
-  background: var(--dark-card);
-  color: var(--dark-text1);
+  position: relative;
+  overflow: hidden;
+  background: var(--card-bg);
+  color: var(--text-color);
+  padding: 1.5625rem;
+  border-radius: 0.3125rem;
+  text-align: center;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer;
+}
+.card:hover {
+  background: var(--card-hover);
+}
+.card--facebook {
+  border-top: 0.3125rem solid var(--facebook);
+}
+.card--twitter {
+  border-top: 0.3125rem solid var(--twitter);
+}
+.card--instagram {
+  padding-top: 1.875rem;
+}
+.card--instagram::before {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  height: 0.3125rem;
+  width: 100%;
+  background: linear-gradient(225deg, var(--instagram-end), var(--instagram-middle) 50.91%, var(--instagram-start));
+}
+.card--youtube {
+  border-top: 0.3125rem solid var(--youtube);
+}
+.card__platform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.25rem;
+  margin-top: 0.3125rem;
+  margin-bottom: 1.75rem;
+}
+.card__subtitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.card__icon {
+  margin-right: 0.5rem;
+}
+.card__username {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.card__followers {
+  margin-bottom: 1.5625rem;
+}
+.card__count {
+  color: var(--text-color);
+  font-weight: 700;
+  letter-spacing: -0.125rem;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.card__count--big {
+  font-size: 3.5rem;
+}
+.card__count--small {
+  font-size: 2rem;
+}
+.card__label {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.3125rem;
+}
+.card__change {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.card__change--up {
+  color: var(--limegreen);
+}
+.card__change--down {
+  color: var(--brightred);
+}
+.card__number {
+  margin-left: 0.25rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  justify-items: start;
+  gap: 1.4375rem;
+}
+.card-grid .card__count {
+  margin-bottom: 0;
+}
+.card-grid .card__count,
+.card-grid .card__change {
+  align-self: end;
+}
+.card-grid img,
+.card-grid .card__change {
+  justify-self: end;
 }
 
 .toggle {
   display: grid;
-  grid-template-columns: 1fr 3rem 1fr;
-  grid-template-rows: repeat(2, 1fr);
-  gap: 0.3rem 0.5rem;
+  grid-template-columns: 1fr 3rem;
   border: none;
   margin: 0;
 }
 .toggle label {
   font-size: 0.875rem;
-  align-self: center;
+  font-weight: 700;
+  color: var(--toggle);
 }
 .toggle label[for=dark] {
-  grid-column: 1/2;
-  justify-self: end;
-}
-.toggle label[for=system] {
-  grid-column: 1/4;
-  grid-row: 2/3;
-  justify-self: center;
-  align-self: start;
+  line-height: 1.5rem;
+  margin-right: 0.8125rem;
 }
 .toggle label[for=light] {
-  grid-column: 3/4;
+  display: none;
 }
 .toggle__wrapper {
   position: relative;
   grid-column: 2/3;
-  grid-row: 1/2;
   height: 1.5rem;
 }
 .toggle input[type=radio] {
   opacity: 0;
   margin: 0 -0.125rem 0 -0.125rem;
-  width: 0.9375rem;
+  width: 1.5625rem;
   height: 1.5rem;
   z-index: 1;
   position: relative;
@@ -133,7 +298,7 @@ a:active {
   top: 0;
   border-radius: 0.75rem;
   overflow: hidden;
-  background: linear-gradient(225deg, var(--toggle-bg-end) 0, var(--toggle-bg-start) 98.02%);
+  background: var(--toggle-bg);
 }
 .toggle__button {
   position: absolute;
@@ -143,7 +308,7 @@ a:active {
   width: 1.125rem;
   height: 1.125rem;
   border-radius: 50%;
-  background-color: var(--dark-bg);
+  background-color: var(--toggle-button);
   transition: all 0.2s ease-in-out;
 }
 .toggle #light:checked ~ .toggle__button {
@@ -154,6 +319,10 @@ a:active {
   left: 50%;
   right: auto;
   transform: translate(-50%);
+}
+
+.visually-hidden {
+  display: none;
 }
 
 .header {
@@ -179,8 +348,5 @@ a:active {
 .header__subtitle {
   font-size: 0.875rem;
   font-weight: 700;
-  color: var(--dark-text1);
-}
-.header__toggle {
-  margin-left: auto;
+  color: var(--text-color2);
 }/*# sourceMappingURL=style.css.map */
